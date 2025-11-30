@@ -1,0 +1,27 @@
+═══════════════════════════════════════════════════════════════════
+  REPORTE DE PRUEBAS - MERGE SORT - EQUIPO INNOAD
+═══════════════════════════════════════════════════════════════════
+
+TABLA DE RESULTADOS:
+─────────────────────────────────────────────────────────────────
+Cantidad Números     Resultado 1 (ms)     Resultado 2 (ms)     Promedio (ms)        Diferencia (ms)     
+─────────────────────────────────────────────────────────────────
+1000                 9                    2                    5,50                 7                   
+5000                 10                   10                   10,00                0                   
+10000                32                   30                   31,00                2                   
+25000                67                   27                   47,00                40                  
+50000                73                   86                   79,50                13                  
+─────────────────────────────────────────────────────────────────
+
+ANÁLISIS DE COMPLEJIDAD:
+El algoritmo Merge Sort tiene una complejidad temporal de O(n log n)
+en todos los casos (mejor, promedio y peor caso).
+
+OBSERVACIONES:
+- Con 1000 números: Diferencia de 7 ms (77,78%)
+- Con 5000 números: Diferencia de 0 ms (0,00%)
+- Con 10000 números: Diferencia de 2 ms (6,25%)
+- Con 25000 números: Diferencia de 40 ms (59,70%)
+- Con 50000 números: Diferencia de 13 ms (17,81%)
+
+═══════════════════════════════════════════════════════════════════

@@ -1,3 +1,4 @@
+
 package com.innoad.ordenamiento;
 
 import java.io.*;
@@ -15,64 +16,82 @@ public class OrdenadorMergeSort {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        boolean repetir = true;
 
-        System.out.println("╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║   ORDENAMIENTO CON MERGE SORT - EQUIPO INNOAD            ║");
-        System.out.println("╚════════════════════════════════════════════════════════════╝");
-        System.out.println();
+        while (repetir) {
+            System.out.println("==============================================================");
+            System.out.println("   ORDENAMIENTO CON MERGE SORT - EQUIPO INNOAD            ");
+            System.out.println("==============================================================");
+            System.out.println();
 
-        // Solicitar cantidad de números al usuario
-        System.out.print("Ingrese la cantidad de números enteros aleatorios a generar: ");
-        int cantidad = scanner.nextInt();
+            // Solicitar cantidad de numeros al usuario
+            System.out.print("Ingrese la cantidad de numeros enteros aleatorios a generar: ");
+            int cantidad = scanner.nextInt();
 
-        // Generar números aleatorios
-        List<Integer> numerosAleatorios = generarNumerosAleatorios(cantidad);
+            if (cantidad < 1) {
+                System.out.println("Error: La cantidad debe ser mayor a 0.");
+                System.out.println();
+                continue;
+            }
 
-        // Guardar números en archivo
-        guardarNumerosEnArchivo(numerosAleatorios, NOMBRE_ARCHIVO);
-        System.out.println("✓ Números generados y guardados en: " + NOMBRE_ARCHIVO);
+            // Generar numeros aleatorios
+            List<Integer> numerosAleatorios = generarNumerosAleatorios(cantidad);
 
-        // Leer números desde el archivo
-        List<Integer> numerosLeidos = leerNumerosDesdeArchivo(NOMBRE_ARCHIVO);
-        System.out.println("✓ Números leídos desde el archivo: " + numerosLeidos.size() + " elementos");
+            // Guardar numeros en archivo
+            guardarNumerosEnArchivo(numerosAleatorios, NOMBRE_ARCHIVO);
+            System.out.println("[OK] Numeros generados y guardados en: " + NOMBRE_ARCHIVO);
 
-        // Mostrar primeros 10 números originales (si hay al menos 10)
-        System.out.println("\n--- NÚMEROS ORIGINALES (primeros 10) ---");
-        mostrarPrimerosElementos(numerosLeidos, 10);
+            // Leer numeros desde el archivo
+            List<Integer> numerosLeidos = leerNumerosDesdeArchivo(NOMBRE_ARCHIVO);
+            System.out.println("[OK] Numeros leidos desde el archivo: " + numerosLeidos.size() + " elementos");
 
-        // Iniciar cronómetro
-        long tiempoInicio = System.currentTimeMillis();
-        System.out.println("\n⏱ Iniciando ordenamiento con Merge Sort...");
+            // Mostrar primeros 10 numeros originales (si hay al menos 10)
+            System.out.println("\n--- NUMEROS ORIGINALES (primeros 10) ---");
+            mostrarPrimerosElementos(numerosLeidos, 10);
 
-        // Ordenar usando Merge Sort
-        List<Integer> numerosOrdenados = mergeSort(numerosLeidos);
+            // Iniciar cronometro
+            long tiempoInicio = System.currentTimeMillis();
+            System.out.println("\nIniciando ordenamiento con Merge Sort...");
 
-        // Detener cronómetro
-        long tiempoFin = System.currentTimeMillis();
-        long tiempoTranscurrido = tiempoFin - tiempoInicio;
+            // Ordenar usando Merge Sort
+            List<Integer> numerosOrdenados = mergeSort(numerosLeidos);
 
-        // Mostrar resultados
-        System.out.println("✓ Ordenamiento completado");
-        System.out.println("\n--- NÚMEROS ORDENADOS (primeros 10) ---");
-        mostrarPrimerosElementos(numerosOrdenados, 10);
+            // Detener cronometro
+            long tiempoFin = System.currentTimeMillis();
+            long tiempoTranscurrido = tiempoFin - tiempoInicio;
 
-        System.out.println("\n╔════════════════════════════════════════════════════════════╗");
-        System.out.println("║  TIEMPO DE ORDENAMIENTO: " + tiempoTranscurrido + " milisegundos");
-        System.out.println("╚════════════════════════════════════════════════════════════╝");
+            // Mostrar resultados
+            System.out.println("[OK] Ordenamiento completado");
+            System.out.println("\n--- NUMEROS ORDENADOS (primeros 10) ---");
+            mostrarPrimerosElementos(numerosOrdenados, 10);
 
-        // Mostrar todos los números ordenados
-        System.out.println("\n¿Desea ver todos los números ordenados? (s/n): ");
-        String respuesta = scanner.next();
-        if (respuesta.equalsIgnoreCase("s")) {
-            System.out.println("\n--- TODOS LOS NÚMEROS ORDENADOS ---");
-            mostrarTodosLosNumeros(numerosOrdenados);
+            System.out.println("\n==============================================================");
+            System.out.println("  TIEMPO DE ORDENAMIENTO: " + tiempoTranscurrido + " milisegundos");
+            System.out.println("==============================================================");
+
+            // Mostrar todos los numeros ordenados
+            System.out.println("\nDesea ver todos los numeros ordenados? (s/n): ");
+            String respuesta = scanner.next();
+            if (respuesta.equalsIgnoreCase("s")) {
+                System.out.println("\n--- TODOS LOS NUMEROS ORDENADOS ---");
+                mostrarTodosLosNumeros(numerosOrdenados);
+            }
+
+            // Preguntar si desea repetir
+            System.out.println("\nDesea realizar otra prueba? (s/n): ");
+            String respuestaRepetir = scanner.next();
+            if (!respuestaRepetir.equalsIgnoreCase("s")) {
+                repetir = false;
+                System.out.println("\nGracias por usar el ordenador Merge Sort. Hasta luego!");
+            }
+            System.out.println();
         }
 
         scanner.close();
     }
 
     /**
-     * Generaria una lista de numeros enteros aleatorios
+     * Genera una lista de numeros enteros aleatorios
      * @param cantidad Cantidad de numeros a generar
      * @return Lista con numeros aleatorios entre 100 y 999
      */
@@ -80,7 +99,7 @@ public class OrdenadorMergeSort {
         List<Integer> numeros = new ArrayList<>();
         Random random = new Random();
 
-        System.out.println("\n⚙ Generando " + cantidad + " numeros aleatorios...");
+        System.out.println("\nGenerando " + cantidad + " numeros aleatorios...");
 
         for (int i = 0; i < cantidad; i++) {
             int numeroAleatorio = random.nextInt(NUMERO_MAXIMO - NUMERO_MINIMO + 1) + NUMERO_MINIMO;
@@ -91,7 +110,7 @@ public class OrdenadorMergeSort {
     }
 
     /**
-     * Guarda la lista de números en un archivo de texto
+     * Guarda la lista de numeros en un archivo de texto
      * @param numeros Lista de numeros a guardar
      * @param nombreArchivo Nombre del archivo donde se guardaran los numeros
      */
@@ -102,14 +121,14 @@ public class OrdenadorMergeSort {
                 escritor.newLine();
             }
         } catch (IOException e) {
-            System.err.println("Error al guardar números en el archivo: " + e.getMessage());
+            System.err.println("Error al guardar numeros en el archivo: " + e.getMessage());
         }
     }
 
     /**
      * Lee numeros desde un archivo de texto y los almacena en una lista
      * @param nombreArchivo Nombre del archivo a leer
-     * @return Lista con los numeros leídos del archivo
+     * @return Lista con los numeros leidos del archivo
      */
     private static List<Integer> leerNumerosDesdeArchivo(String nombreArchivo) {
         List<Integer> numeros = new ArrayList<>();
@@ -120,7 +139,7 @@ public class OrdenadorMergeSort {
                 numeros.add(Integer.parseInt(linea.trim()));
             }
         } catch (IOException e) {
-            System.err.println("Error al leer números del archivo: " + e.getMessage());
+            System.err.println("Error al leer numeros del archivo: " + e.getMessage());
         }
 
         return numeros;
@@ -134,7 +153,7 @@ public class OrdenadorMergeSort {
      * @return Lista ordenada
      */
     private static List<Integer> mergeSort(List<Integer> lista) {
-        // Caso base: si la lista tiene 1 o menos elementos, ya está ordenada
+        // Caso base: si la lista tiene 1 o menos elementos, ya esta ordenada
         if (lista.size() <= 1) {
             return lista;
         }
@@ -202,7 +221,7 @@ public class OrdenadorMergeSort {
 
     /**
      * Muestra los primeros N elementos de una lista
-     * @param lista Lista de números
+     * @param lista Lista de numeros
      * @param cantidad Cantidad de elementos a mostrar
      */
     private static void mostrarPrimerosElementos(List<Integer> lista, int cantidad) {
@@ -211,7 +230,7 @@ public class OrdenadorMergeSort {
             System.out.print(lista.get(i) + " ");
         }
         if (lista.size() > cantidad) {
-            System.out.print("... (y " + (lista.size() - cantidad) + " más)");
+            System.out.print("... (y " + (lista.size() - cantidad) + " mas)");
         }
         System.out.println();
     }
